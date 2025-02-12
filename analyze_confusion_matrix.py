@@ -3,16 +3,22 @@ import os
 import numpy as np
 import seaborn as sns
 
-n_classes = 7
-cm = np.array([
-    [270,10,37,5,5,13,3],
-    [45,220,30,37,28,23,2],
-    [47,9,277,5,12,26,1],
-    [30,23,14,282,11,19,2],
-    [26,35,105,30,166,18,5],
-    [46,21,68,43,16,197,0],
-    [5,4,3,2,8,3,107]
-])
+num_classes = 7
+excecution = "12-02-2025__16:19"
+path_to_cm = "logs/"+excecution+"/confusion_matrix.npy"
+
+classes = []
+if num_classes == 8:
+    classes = ['Neutral', 'Calm', 'Happy', 'Sad', 'Angry', 'Fearful', 'Disgust', 'Surprised']
+elif num_classes == 7:
+    classes = ['Neutral', 'Happy', 'Sad', 'Angry', 'Fearful', 'Disgust', 'Surprised']
+elif num_classes == 3:
+    classes = ['Low', 'Medium', 'High']
+else:
+    classes = [str(i) for i in range(num_classes)]
+
+# Load the confusion matrix as npy file
+cm = np.load(path_to_cm)
 
 
 # np.set_printoptions(suppress=True, precision=4)
@@ -24,7 +30,7 @@ cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
 
 # Plot the confusion matrix
 plt.figure(figsize=(10, 7))
-sns.heatmap(cm_normalized, annot=True, fmt=".2%", cmap='Blues', cbar=False)
+sns.heatmap(cm_normalized, annot=True, fmt=".2%", cmap='Blues', cbar=False, xticklabels=classes, yticklabels=classes)
 plt.title('Confusion Matrix with Percentages')
 plt.xlabel('Predicted')
 plt.ylabel('Actual')
@@ -32,7 +38,7 @@ plt.show()
 
 
 
-for c in range(n_classes):
+for c in range(num_classes):
     tp = cm[c,c]
     fp = sum(cm[:,c]) - cm[c,c]
     fn = sum(cm[c,:]) - cm[c,c]

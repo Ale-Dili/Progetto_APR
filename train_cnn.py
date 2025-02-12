@@ -133,7 +133,7 @@ X_test = np.expand_dims(X_test, axis=-1)
 
 
 #config tensorboard
-log_dir = "logs/" + datetime.datetime.now().strftime("%d_%m_%Y__%H:%M")
+log_dir = "logs/" + datetime.datetime.now().strftime("%d-%m-%Y__%H:%M")
 tensorboard_callback = TensorBoard(log_dir=log_dir, histogram_freq=1)
 #print num classes
 print(f'Number of classes: {num_classes}')
@@ -149,7 +149,7 @@ model.compile(optimizer='adam',
 
 
 
-history = model.fit(X_train, y_train, epochs=30, validation_data=(X_val, y_val), batch_size=32,callbacks=[tensorboard_callback])
+history = model.fit(X_train, y_train, epochs=10, validation_data=(X_val, y_val), batch_size=32,callbacks=[tensorboard_callback])
 
 
 test_loss, test_acc = model.evaluate(X_test, y_test)
