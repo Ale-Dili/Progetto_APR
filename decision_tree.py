@@ -6,12 +6,12 @@ from sklearn.metrics import confusion_matrix
 import seaborn as sns
 
 # load data
-X_test = np.load("processed_data/fe_X_test.npy")
-X_train = np.load("processed_data/fe_X_train.npy")
-X_val = np.load("processed_data/fe_X_val.npy")
-y_test = np.load("processed_data/fe_y_test.npy")
-y_train = np.load("processed_data/fe_y_train.npy")
-y_val = np.load("processed_data/fe_y_val.npy")
+X_test = np.load("data/processed_data_features/X_test.npy")
+X_train = np.load("data/processed_data_features/X_train.npy")
+X_val = np.load("data/processed_data_features/X_val.npy")
+y_test = np.load("data/processed_data_features/y_test.npy")
+y_train = np.load("data/processed_data_features/y_train.npy")
+y_val = np.load("data/processed_data_features/y_val.npy")
 
 # define parameter grid for the RandomForestClassifier
 param_grid = {
@@ -21,11 +21,19 @@ param_grid = {
     'min_samples_leaf': [None, 1, 2]
 }
 
+
+
+#print train shape
+print(X_train.shape)
+print(y_train.shape)
+
+
+
 # create a RandomForestClassifier with a fixed random_state
-rf = RandomForestClassifier(random_state=42)
+rf = RandomForestClassifier(random_state=44)
 
 # initialize GridSearchCV with 5-fold cross validation
-grid_search = GridSearchCV(estimator=rf, param_grid=param_grid, cv=5, n_jobs=-1)
+grid_search = GridSearchCV(estimator=rf, param_grid=param_grid, cv=5, n_jobs=-1, verbose=2)
 grid_search.fit(X_train, y_train)
 
 print("Best Parameters:", grid_search.best_params_)
@@ -49,6 +57,9 @@ print(classification_report(y_test, y_test_pred))
 import matplotlib.pyplot as plt
 
 cm = confusion_matrix(y_test, y_test_pred)
+
+np.save('logs/decision_tree/confusion_matrix.npy', cm)
+
 plt.figure(figsize=(8, 6))
 sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", cbar=False)
 plt.title("Confusion Matrix - Test Set")

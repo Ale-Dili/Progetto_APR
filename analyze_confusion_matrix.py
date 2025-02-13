@@ -4,7 +4,7 @@ import numpy as np
 import seaborn as sns
 
 num_classes = 7
-excecution = "12-02-2025__16:19"
+excecution = "decision_tree"
 path_to_cm = "logs/"+excecution+"/confusion_matrix.npy"
 
 classes = []

@@ -125,6 +125,9 @@ y_val = np.load("data/processed_data_spectro/y_val.npy")
 
 num_classes = len(np.unique(y_train))
 
+print("X_train shape:", X_train.shape)
+print("y_train shape:", y_train.shape)
+
 '''
 X_train = np.expand_dims(X_train, axis=-1)
 X_val = np.expand_dims(X_val, axis=-1)
@@ -149,7 +152,7 @@ model.compile(optimizer='adam',
 
 
 
-history = model.fit(X_train, y_train, epochs=10, validation_data=(X_val, y_val), batch_size=32,callbacks=[tensorboard_callback])
+history = model.fit(X_train, y_train, epochs=15, validation_data=(X_val, y_val), batch_size=32,callbacks=[tensorboard_callback])
 
 
 test_loss, test_acc = model.evaluate(X_test, y_test)
