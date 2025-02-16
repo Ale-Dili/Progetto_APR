@@ -4,6 +4,7 @@ from sklearn.metrics import classification_report, accuracy_score
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import confusion_matrix
 import seaborn as sns
+import matplotlib.pyplot as plt
 
 # load data
 X_test = np.load("data/processed_data_features/X_test.npy")
@@ -54,7 +55,7 @@ print("Test Accuracy:", accuracy_score(y_test, y_test_pred))
 print("Test Classification Report:")
 print(classification_report(y_test, y_test_pred))
 
-import matplotlib.pyplot as plt
+
 
 cm = confusion_matrix(y_test, y_test_pred)
 
