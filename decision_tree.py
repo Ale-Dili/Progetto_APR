@@ -59,7 +59,7 @@ print(classification_report(y_test, y_test_pred))
 
 cm = confusion_matrix(y_test, y_test_pred)
 
-np.save('logs/decision_tree/confusion_matrix.npy', cm)
+np.save('logs/decision_tree_crema/confusion_matrix.npy', cm)
 
 plt.figure(figsize=(8, 6))
 sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", cbar=False)

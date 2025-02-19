@@ -4,7 +4,7 @@ import numpy as np
 import seaborn as sns
 
 num_classes = 7
-excecution = "XGBoost_no-crema"
+excecution = "decision_tree-no_crema"
 path_to_cm = "logs/"+excecution+"/confusion_matrix.npy"
 
 classes = []
